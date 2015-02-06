@@ -1,0 +1,20 @@
+Data Structures for Scraping
+ - From the top down
+
+ 1. MealList - Array of size 3, one space for each meal i.e. breakfast, lunch, and dinner.
+ 			 - Use hashmap to hold data hashmap(Meal, DCList)
+
+ 2. DCList - Array of size 4, one for each dining hall
+    	   - hashmap(DC, FoodList)
+
+ 3. FoodList - ArrayList of food offered at specific dining hall for a specific meal
+ 			 - ArrayList(food) need to specifiy vegan/vegetarian etc	
+
+ Structure of Data Structure 
+
+ 1 x MealList --> 3 x DCList
+ 1 x DCList --> 4 x FoodList
+
+TO DO:
+1. Figure out how the 3 data structures connect to each other
+2. Figure out how to use the H2/MYSQL??? database and how to read and write to and from it.
