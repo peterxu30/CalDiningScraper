@@ -9,32 +9,41 @@ import java.util.HashMap;
 //smallest data structure
 
 public class FoodList {
-	private String[] foodType = {"", "vegetarian", "vegan"};
 	private HashMap<String, String> foodType = new HashMap<String, String>();
-	foodType.put("#000000", "");
-	foodType.put("#008000", "vegetarian");
-	foodType.put("#800040", "vegan");
+	ArrayList<StringTuple> foodList;
 	
-	public FoodList(Elements td) { //constructor
-		ArrayList<StringTuple> foodList = new ArrayList<StringTuple>();
+	public FoodList(Element td) { //constructor
+		foodType.put("#000000", "normal");
+		foodType.put("#008000", "vegetarian");
+		foodType.put("#800040", "vegan");
+
+		foodList = new ArrayList<StringTuple>();
 
 		Elements foods = td.select("a");
 
 		for (Element food: foods) {
-			foodList.add(new Tuple(checkFoodType(food)), food.text());
+			foodList.add(new StringTuple(checkFoodType(food), food.text()));
 		}
 	}
 
 	private String checkFoodType(Element food) { //takes in everything between <a>...</a>
 		String font = food.select("font").attr("color");
-		return foodType(font);
+		return foodType.get(font);
 	}
+
+	public String text() {
+		String words = "";
+		for (StringTuple food: foodList) {
+			words = words + "\n" + food.head + ": " + food.tail;
+		}
+		return words;
+	} 
 
 	public class StringTuple {
 		String head;
 		String tail;
 
-		private Tuple(String head, String tail) {
+		private StringTuple(String head, String tail) {
 			this.head = head;
 			this.tail = tail;
 		} 

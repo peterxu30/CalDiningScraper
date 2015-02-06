@@ -23,7 +23,9 @@ public class FoodScraper {
 
 		MealList mealList = new MealList(rows); //hashtable for 3 meals
 
-		System.out.println(mealList.getMeal("Breakfast")); //works
+
+
+		System.out.println(mealList.getDCList("Breakfast").getFoodList("Foothill").text()); //works
 
 		
 

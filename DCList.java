@@ -10,19 +10,25 @@ import java.util.HashMap;
 
 public class DCList {
 	private String[] dcName = {"Crossroads", "Cafe 3", "Foothill", "Clark Kerr"};
-	private HashMap<String, Element> dcList = new HashMap<String, Element>();
+	private HashMap<String, FoodList> dcList = new HashMap<String, FoodList>();
 	
 	public DCList(Element row) { //creates new DCList object
 		
 		Elements columns = row.select("td");
 
 		for (int i = 0; i <= 3; i++) { //fills in the array with Table Row elements. Also skips unecessary rows
-		    dcList.put(dcName[i], columns.get(i)); //associates a column to a dining hall
+		    addFoodList(dcName[i], columns.get(i)); //associates a column to a dining hall
 		}
 	}
 
-	public Element getDC(String dc) {
-		return mealList.get(dc);
+	public void addFoodList(String mealName, Element column) {
+		dcList.put(mealName, new FoodList(column));
 	}
+
+	public FoodList getFoodList(String dc) {
+		return dcList.get(dc);
+	}
+
+
 
 }
