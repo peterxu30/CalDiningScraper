@@ -9,7 +9,7 @@ import java.util.HashMap;
 //intermediary data structure
 
 public class DCList {
-	private String[] dcName = {"Crossroads", "Cafe 3", "Foothill", "Clark Kerr"};
+	private String[] dcName = {"Crossroads", "Cafe_3", "Foothill", "Clark Kerr"};
 	private HashMap<String, FoodList> dcList = new HashMap<String, FoodList>();
 	
 	public DCList(Element row) { //creates new DCList object

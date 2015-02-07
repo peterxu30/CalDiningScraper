@@ -36,6 +36,8 @@ public class FoodList {
 		for (StringTuple food: foodList) {
 			words = words + "\n" + food.head + ": " + food.tail;
 		}
+		if (words == "")
+			return "Closed";
 		return words;
 	} 
 
