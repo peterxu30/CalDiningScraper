@@ -39,17 +39,30 @@ public class MainFoodScraper {
 		return mealList.getDCList(meal).getFoodList(dc).specificText(diet);
 	}
 
+	public String getDCMenu(String dc) { //all menus for a dining hall
+		String text = "\n";
+		text += "Breakfast:" + getMenu("breakfast", dc, "") + "\n";
+		text += "Lunch:" + getMenu("lunch", dc, "") + "\n";
+		text += "Dinner:" + getMenu("dinner", dc, "") + "\n";
+		return text;
+	}
+
 	public static void main(String[] args) throws Exception { //exists purely for testing purposes
 		MainFoodScraper new1 = new MainFoodScraper("http://services.housing.berkeley.edu/FoodPro/dining/static/todaysentrees.asp", 0, 3, 11, 4);
 
 		String meal = args[0]; //command line input
-		String location = args[1];
-		if (args.length == 3) {
-			String diet = args[2];
-			System.out.println(new1.getMenu(meal, location, diet));
+		if (args.length == 1) {
+			System.out.println(new1.getDCMenu(args[0]));
 		}
 		else {
-			System.out.println(new1.getMenu(meal, location));
+			String location = args[1];
+			if (args.length == 3) {
+				String diet = args[2];
+				System.out.println(new1.getMenu(meal, location, diet));
+			}
+			else {
+				System.out.println(new1.getMenu(meal, location));
+			}
 		}
 
 		//MainFoodScraper new1 = new MainFoodScraper("http://services.housing.berkeley.edu/FoodPro/dining/static/todaysentrees.asp", 0, 3, 11, 4);

@@ -37,7 +37,7 @@ public class FoodList {
 			words = words + "\n" + food.head + " " + food.tail;
 		}
 		if (words == "")
-			return "Closed";
+			return "Closed\n";
 		words += "\n";
 		return words;
 	} 

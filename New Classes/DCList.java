@@ -9,26 +9,31 @@ import java.util.HashMap;
 //intermediary data structure
 
 public class DCList {
-	private String[] dcName = {"Crossroads", "Cafe_3", "Foothill", "Clark Kerr"};
+	private String[] dcName = {"crossroads", "cafe_3", "foothill", "clark Kerr"};
 	private HashMap<String, FoodList> dcList = new HashMap<String, FoodList>();
+	private Elements columns;
 	
 	public DCList(Element row, int colNum) { //creates new DCList object
 		
-		Elements columns = row.select("td");
+		columns = row.select("td");
 
-		for (int i = 0; i <= (colNum-1); i++) { //fills in the array with Table Row elements. Also skips unecessary rows
-		    addFoodList(dcName[i], columns.get(i)); //associates a column to a dining hall
-		}
+		scrapeAll(colNum);		
 	}
 
-	public void addFoodList(String mealName, Element column) {
+	private void scrapeDC(int dc) { //scrapes one dc
+		String mealName = dcName[dc];
+		Element column = columns.get(dc);
 		dcList.put(mealName, new FoodList(column));
+	}
+
+	private void scrapeAll(int colNum) {
+		for (int i = 0; i <= (colNum-1); i++) { //fills in the array with Table Row elements. Also skips unecessary rows
+		    scrapeDC(i); //associates a column to a dining hall
+		}
 	}
 
 	public FoodList getFoodList(String dc) {
 		return dcList.get(dc);
 	}
-
-
 
 }

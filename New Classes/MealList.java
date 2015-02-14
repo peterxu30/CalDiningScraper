@@ -9,7 +9,7 @@ import java.util.HashMap;
 //largest data structure
 
 public class MealList {
-	private String[] mealName = {"Breakfast", "Lunch", "Dinner"};
+	private String[] mealName = {"breakfast", "lunch", "dinner"};
 	private HashMap<String, DCList> mealList = new HashMap<String, DCList>();
 	
 	public MealList(Elements rows, int rowNum, int startRow, int colNum) { //creates new FoodList object
