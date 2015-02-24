@@ -9,19 +9,19 @@ import java.util.HashMap;
 //largest data structure
 
 public class MealList {
-	private String[] mealName = {"Breakfast", "Lunch", "Dinner"};
+	private String[] mealName = {"breakfast", "lunch", "dinner"};
 	private HashMap<String, DCList> mealList = new HashMap<String, DCList>();
 	
-	public MealList(Elements rows) { //creates new FoodList object
+	public MealList(Elements rows, int rowNum, int startRow, int colNum) { //creates new FoodList object
 
-		for (int i = 0; i <= 2; i++) { //fills in the array with Table Row elements. Also skips unecessary rows
+		for (int i = 0; i <= (rowNum - 1); i++) { //fills in the array with Table Row elements. Also skips unecessary rows
 		    //mealList.put(mealName[i], rows.get(i+11));
-		    addDCList(mealName[i], rows.get(i+11));
+		    addDCList(mealName[i], rows.get(i+startRow), colNum);
 		}
 	}
 
-	public void addDCList(String mealName, Element row) {
-		mealList.put(mealName, new DCList(row));
+	public void addDCList(String mealName, Element row, int colNum) {
+		mealList.put(mealName, new DCList(row, colNum));
 	}
 
 	public DCList getDCList(String meal) {

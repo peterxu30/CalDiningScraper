@@ -10,19 +10,19 @@ import java.util.HashMap;
 
 public class FoodList {
 	private HashMap<String, String> foodType = new HashMap<String, String>();
-	ArrayList<StringTuple> foodList;
+	private ArrayList<StringTuple> foodList;
 	
 	public FoodList(Element td) { //constructor
-		foodType.put("#000000", "normal");
-		foodType.put("#008000", "vegetarian");
-		foodType.put("#800040", "vegan");
+		foodType.put("#000000", "");
+		foodType.put("#008000", "(vegetarian)");
+		foodType.put("#800040", "(vegan)");
 
 		foodList = new ArrayList<StringTuple>();
 
 		Elements foods = td.select("a");
 
 		for (Element food: foods) {
-			foodList.add(new StringTuple(checkFoodType(food), food.text()));
+			foodList.add(new StringTuple(food.text(), checkFoodType(food)));
 		}
 	}
 
@@ -34,12 +34,41 @@ public class FoodList {
 	public String text() {
 		String words = "";
 		for (StringTuple food: foodList) {
-			words = words + "\n" + food.head + ": " + food.tail;
+			words = words + "\n" + food.head + " " + food.tail;
 		}
 		if (words == "")
-			return "Closed";
+			return "Closed\n";
+		words += "\n";
 		return words;
 	} 
+
+	public String specificText(String type) { //sorts by normal, vegetarian, or vegan
+		String words = "";
+		String classification = "";
+		if (type.equals("")) {
+			return text();
+		}
+		else if (type.equals("vegan")) {
+			classification = "(vegan)";
+			words += "\nVegan:\n";
+		}
+		else if (type.equals("vegetarian")) {
+			classification = "(vegetarian)";
+			words += "\nVegetarian:\n";
+		}
+		for (StringTuple food: foodList) {
+			if (classification.equals("(vegetarian)")) { //temporary hot fix. get rid of this if statement, it's bad form
+				if (food.tail.equals(classification) || food.tail.equals("(vegan)")) {
+					words = words + "\n" + food.head;
+				}
+			}
+			else if (food.tail.equals(classification)) {
+				words = words + "\n" + food.head;
+			}
+		}
+		words += "\n";
+		return words;
+	}
 
 	public class StringTuple {
 		String head;
