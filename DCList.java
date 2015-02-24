@@ -21,9 +21,9 @@ public class DCList {
 	}
 
 	private void scrapeDC(int dc) { //scrapes one dc
-		String dcName = dcName[dc];
+		String name = dcName[dc];
 		Element column = columns.get(dc);
-		dcList.put(dcName, new FoodList(column));
+		dcList.put(name, new FoodList(column));
 	}
 
 	private void scrapeAll(int colNum) {

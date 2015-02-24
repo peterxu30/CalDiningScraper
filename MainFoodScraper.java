@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections; 
 import java.util.HashMap; 
 
-//turning main method into a new data structure
+// turning main method into a new data structure
 
+// The data structure that the launcher will interact with.
 public class MainFoodScraper {
 
 	private MealList mealList;
@@ -26,20 +27,29 @@ public class MainFoodScraper {
 
 	}
 
+	// In Progress. Experimental method. 
 	public static String getDCMenuURL(int dc, Elements rows) throws Exception { //gets URLS for specific dining hall 0 - Crossroads, 1 - Cafe 3, 2 - Foothill, 3 - CKC
 		Element halls = rows.get(10);
 		return halls.select("a").get(dc).text();//filler text IN PROGRESS
 	} 
 
-	public String getMenu(String meal, String dc) { //returns menu for specific meal for 1 DC
-		return mealList.getDCList(meal).getFoodList(dc).text();
+	// Returns Menu as a String
+	private String getMenuText(FoodList foodie, String diet) {
+		return foodie.text(diet);
 	}
 
-	public String getMenu(String meal, String dc, String diet) { //returns menu for specific meal for 1 DC
-		return mealList.getDCList(meal).getFoodList(dc).specificText(diet);
+	// Returns a menu filtered based on dietary restrictions for a specific meal at a specific dining hall.
+	public String getMenu(String meal, String dc, String diet) {
+		return getMenuText(mealList.getDCList(meal).getFoodList(dc), diet);
 	}
 
-	public String getDCMenu(String dc) { //all menus for a dining hall
+	// Returns a menu for a specific meal at a specific dining hall.
+	public String getMenu(String meal, String dc) { 
+		return getMenu(meal, dc, "");
+	}
+
+	// Returns complete menu for a specific dining hall.
+	public String getCompleteMenu(String dc) { 
 		String text = "\n";
 		text += "Breakfast:" + getMenu("breakfast", dc, "") + "\n";
 		text += "Lunch:" + getMenu("lunch", dc, "") + "\n";
@@ -47,41 +57,25 @@ public class MainFoodScraper {
 		return text;
 	}
 
-	public static void main(String[] args) throws Exception { //exists purely for testing purposes
+	// Exists purely for testing purposes
+	public static void main(String[] args) throws Exception { 
 		MainFoodScraper new1 = new MainFoodScraper("http://services.housing.berkeley.edu/FoodPro/dining/static/todaysentrees.asp", 0, 3, 11, 4);
 
-		String meal = args[0]; //command line input
+		String location = args[0]; //command line input
 		if (args.length == 1) {
-			System.out.println(new1.getDCMenu(args[0]));
+			System.out.println(new1.getCompleteMenu(meal));
 		}
 		else {
-			String location = args[1];
+			String meal = args[1];
 			if (args.length == 3) {
 				String diet = args[2];
 				System.out.println(new1.getMenu(meal, location, diet));
 			}
 			else {
-				System.out.println(new1.getMenu(meal, location));
+				System.out.println(new1.getMenu(meal, location, ""));
 			}
 		}
 
-		//MainFoodScraper new1 = new MainFoodScraper("http://services.housing.berkeley.edu/FoodPro/dining/static/todaysentrees.asp", 0, 3, 11, 4);
-		//System.out.println(new1.getMenu("Lunch", "Foothill", "vegan"));
-		
-		
-
-
-		//System.out.println(getMenu(mealList, meal, location)); //works
-
-		//System.out.println(getDCMenuURL("Foothill", rows)); //works
-
-		
-
-
-
-
-		//System.out.println(rowArray[1].text()); //test
 	}
-
 
 }

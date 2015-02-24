@@ -31,7 +31,7 @@ public class FoodList {
 		return foodType.get(font);
 	}
 
-	public String text() {
+	private String basic_text() {
 		String words = "";
 		for (StringTuple food: foodList) {
 			words = words + "\n" + food.head + " " + food.tail;
@@ -42,11 +42,11 @@ public class FoodList {
 		return words;
 	} 
 
-	public String specificText(String type) { //sorts by normal, vegetarian, or vegan
+	public String text(String type) { //sorts by normal, vegetarian, or vegan
 		String words = "";
 		String classification = "";
 		if (type.equals("")) {
-			return text();
+			return basic_text();
 		}
 		else if (type.equals("vegan")) {
 			classification = "(vegan)";
