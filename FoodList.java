@@ -58,11 +58,11 @@ public class FoodList {
 		}
 		for (StringTuple food: foodList) {
 			if (classification.equals("(vegetarian)")) { //temporary hot fix. get rid of this if statement, it's bad form
-				if (food.tail.equals(classification) || food.tail.equals("(vegan)")) {
+				if (classification.equals(food.tail) || "(vegan)".equals(food.tail)) {
 					words = words + "\n" + food.head;
 				}
 			}
-			else if (food.tail.equals(classification)) {
+			else if (classification.equals(food.tail)) {
 				words = words + "\n" + food.head;
 			}
 		}

@@ -63,7 +63,7 @@ public class MainFoodScraper {
 
 		String location = args[0]; //command line input
 		if (args.length == 1) {
-			System.out.println(new1.getCompleteMenu(meal));
+			System.out.println(new1.getCompleteMenu(location));
 		}
 		else {
 			String meal = args[1];
