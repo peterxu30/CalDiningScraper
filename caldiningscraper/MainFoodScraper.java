@@ -32,7 +32,10 @@ public class MainFoodScraper {
 
 	/* Returns Menu as a String */
 	private String getMenuText(FoodList foodie, String diet) {
-		return foodie.text(diet);
+		if (foodie != null) {
+			return foodie.text(diet);
+		}
+		return "closed";
 	}
 
 	/* Returns a menu filtered based on dietary restrictions for a specific meal at a specific dining hall. */
@@ -46,12 +49,21 @@ public class MainFoodScraper {
 	}
 
 	/* Returns complete menu for a specific dining hall. */
-	public String getCompleteMenu(String dc) { 
+	public String getDCMenu(String dc) { 
 		String text = "\n";
 		text += "Breakfast:" + getMenu("breakfast", dc, "") + "\n";
 		text += "Lunch:" + getMenu("lunch", dc, "") + "\n";
 		text += "Dinner:" + getMenu("dinner", dc, "") + "\n";
 		return text;
+	}
+
+	public String getCompleteMenu() {
+		String[] dcs = new String[]{"crossroads", "cafe_3", "foothill", "clark kerr"};
+		String compMenu = "";
+		for (String dc : dcs) {
+			compMenu += dc + "\n" + getDCMenu(dc);
+		}
+		return compMenu;
 	}
 
 	/* IN PROGRESS */
@@ -63,6 +75,7 @@ public class MainFoodScraper {
 		if (mealList.getDCList(meal).getFoodList(dc).search(food)) {
 			return food + " is available at " + dc + " during " + meal + ".";
 		}
+		return food + " is not available today.";
 	}
 
 	// Exists purely for testing purposes
@@ -71,7 +84,7 @@ public class MainFoodScraper {
 
 		String location = args[0]; //command line input
 		if (args.length == 1) {
-			System.out.println(new1.getCompleteMenu(location));
+			System.out.println(new1.getDCMenu(location));
 		}
 		else {
 			String meal = args[1];

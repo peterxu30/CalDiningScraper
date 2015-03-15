@@ -31,15 +31,16 @@ public class MealList {
 	}
 
 	/* IN PROGRESS */
-	String[] searchMeal(String food) {
-		String[] meals = new String[3];
+	boolean[][] searchMeal(String food) {
+		boolean[][] meals = new boolean[3][];
 		// for (int i = 0; i <= 3; i++) {
 		// 	meals[i] = new String[4];
 		// }
 		int count = 0;
-		for (DCList dcl : mealList) {
+		for (DCList dcl : mealList.values()) {
 			meals[count] = dcl.searchDC(food);
 			count += 1;
 		}
+		return meals;
 	}
 }
