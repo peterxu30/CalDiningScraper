@@ -23,6 +23,7 @@ public class FoodList {
 		foodType.put("#008000", "(vegetarian)");
 		foodType.put("#800040", "(vegan)");
 		foodType.put("#800000", "(vegan)");
+		foodType.put("#800080", "(vegan)");
 		Elements foods = td.select("a");
 		for (Element food: foods) {
 			// foodList.add(new StringTuple(food.text(), checkFoodType(food)));
